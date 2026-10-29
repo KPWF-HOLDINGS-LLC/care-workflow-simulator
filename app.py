@@ -1,5 +1,6 @@
 """Local-only HTTP adapter for the synthetic workflow."""
 
+import argparse
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
@@ -82,8 +83,13 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main():
-    server = HTTPServer(("127.0.0.1", 8765), Handler)
-    print("Synthetic workflow ready at http://127.0.0.1:8765")
+    parser = argparse.ArgumentParser(description="Run the local synthetic workflow")
+    parser.add_argument("--port", type=int, default=8765)
+    args = parser.parse_args()
+    if not 1 <= args.port <= 65535:
+        parser.error("port must be between 1 and 65535")
+    server = HTTPServer(("127.0.0.1", args.port), Handler)
+    print(f"Synthetic workflow ready at http://127.0.0.1:{args.port}")
     try:
         server.serve_forever()
     except KeyboardInterrupt:

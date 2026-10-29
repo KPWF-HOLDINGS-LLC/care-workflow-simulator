@@ -2,9 +2,11 @@
 
 A local, dependency-free demo of a care check-in workflow. It shows a mock check-in, scripted responses, review alert creation, acknowledgement, and reset. Cases are synthetic and kept in memory only.
 
+![Care workflow preview](docs/preview.png)
+
 ## Run locally
 
-With Python 3.12 or newer, run `python3 app.py` and open the loopback address printed by the program. Run `python3 -m unittest discover -s tests -v` to check the domain rules and HTTP boundary.
+With Python 3.12 or newer, run `python3 app.py` and open the loopback address printed by the program. Use `python3 app.py --port 8768` if the default port is occupied. Run `python3 -m unittest discover -s tests -v` to check the domain rules and HTTP boundary.
 
 ## Safety and scope
 
